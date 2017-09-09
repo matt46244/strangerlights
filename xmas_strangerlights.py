@@ -286,62 +286,25 @@ if __name__ == '__main__':
     initLights(strip)
     
     #loop randomy betwen 15 seconds and 2 minutes
-    #time.sleep(3)
-    time.sleep(random.randint(15,120))
+    time.sleep(3)
+    #time.sleep(random.randint(15,120))
 
     #pick a random response
-    switch = random.randint(1,30)
+    switch = random.randint(1,3)
     #switch = 15
 
     if switch == 1:
-        word = 'its here'
+        word = 'fart'
         blinkWords(strip, word)
     elif switch == 2:
-        word = 'die die die'
+        word = 'butts'
         blinkWords(strip, word)
-    elif switch == 3:
-        runBlink(strip)
-    elif switch == 4:
-        word = 'boobs'
-        blinkWords(strip, word)
-    elif switch == 5:
-        word = 'spooky'
-        blinkWords(strip, word)
-    elif switch == 6:
-        word = 'six six six'
-        blinkWords(strip, word)
-    elif switch == 7:
-        word = 'redrum'
-        blinkWords(strip, word)
-    elif switch == 8:
-        word = 'go away'
-        blinkWords(strip, word)
-    elif switch == 9:
-        word = 'fuck off'
-        blinkWords(strip, word)
-    elif switch == 10:
-        word = 'lucifer'
-        blinkWords(strip, word)
-    elif switch == 11:
-        word = 'harambe'
-        blinkWords(strip, word)
-    elif switch == 12:
-        runBlink(strip)
-    elif switch == 13:
-        turnOff(strip)
-        colorWipe(strip, RED, 150)
-        time.sleep(5)
-        turnOff(strip)
-    elif switch == 14:
-        turnOff(strip)
-        rainbow(strip, 150, 5)
-        turnOff(strip)
     else:
         flickerWhole(strip)
  
     #wait 2 seconds before resetting the lights
-    #time.sleep(2)
-    time.sleep(random.randint(2,8))
+    time.sleep(2)
+    #time.sleep(random.randint(2,8))
     randomOn(strip)
 
     #lets do the time warp again

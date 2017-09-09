@@ -69,12 +69,13 @@ def initLights(strip):
     strip.setPixelColor(i+LIGHTSHIFT, COLORS[i%colorLen])
   strip.show()
 
-def blinkWords(strip, word):
+def blinkWords(strip, color, word):
   """
   blinks a string of letters
 
   inputs: 
     strip = color strip instance to action against
+    color = color for the word
     word = word to blink
 
   outputs:
@@ -97,7 +98,7 @@ def blinkWords(strip, word):
   #otherwise, stall
   for character in word:
     if character in ALPHABET:
-      strip.setPixelColor(ALPHABET.index(character)+LIGHTSHIFT, RED)
+      strip.setPixelColor(ALPHABET.index(character)+LIGHTSHIFT, color)
       strip.show()
       time.sleep(1)
       strip.setPixelColor(ALPHABET.index(character)+LIGHTSHIFT, OFF)
@@ -286,53 +287,33 @@ if __name__ == '__main__':
     initLights(strip)
     
     #loop randomy betwen 15 seconds and 2 minutes
-    #time.sleep(3)
-    time.sleep(random.randint(15,120))
+    time.sleep(3)
+    #time.sleep(random.randint(15,120))
 
     #pick a random response
-    switch = random.randint(1,30)
-    #switch = 15
+    #switch = random.randint(1,12)
+    switch = 1
 
     if switch == 1:
-        word = 'its here'
-        blinkWords(strip, word)
+        word = 'abcdefghijklmnnopqrstuvwxyz'
+        blinkWords(strip, RANDOM, word)
     elif switch == 2:
-        word = 'die die die'
-        blinkWords(strip, word)
+        word = 'aaron'
+        blinkWords(strip, RANDOM, word)
     elif switch == 3:
-        runBlink(strip)
+        word = 'omgbaby'
+        blinkWords(strip, RANDOM, word)
     elif switch == 4:
-        word = 'boobs'
-        blinkWords(strip, word)
-    elif switch == 5:
-        word = 'spooky'
-        blinkWords(strip, word)
-    elif switch == 6:
-        word = 'six six six'
-        blinkWords(strip, word)
-    elif switch == 7:
-        word = 'redrum'
-        blinkWords(strip, word)
-    elif switch == 8:
-        word = 'go away'
-        blinkWords(strip, word)
-    elif switch == 9:
-        word = 'fuck off'
-        blinkWords(strip, word)
-    elif switch == 10:
-        word = 'lucifer'
-        blinkWords(strip, word)
-    elif switch == 11:
-        word = 'harambe'
-        blinkWords(strip, word)
-    elif switch == 12:
-        runBlink(strip)
-    elif switch == 13:
         turnOff(strip)
-        colorWipe(strip, RED, 150)
+        colorWipe(strip, TURQUOISE, 150)
         time.sleep(5)
         turnOff(strip)
-    elif switch == 14:
+    elif switch == 5:
+        turnOff(strip)
+        colorWipe(strip, PURPLE, 150)
+        time.sleep(5)
+        turnOff(strip)
+    elif switch == 6:
         turnOff(strip)
         rainbow(strip, 150, 5)
         turnOff(strip)
@@ -340,8 +321,8 @@ if __name__ == '__main__':
         flickerWhole(strip)
  
     #wait 2 seconds before resetting the lights
-    #time.sleep(2)
-    time.sleep(random.randint(2,8))
+    time.sleep(2)
+    #time.sleep(random.randint(2,8))
     randomOn(strip)
 
     #lets do the time warp again

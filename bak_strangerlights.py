@@ -49,7 +49,7 @@ GREENMASK = 0b000000001111111100000000
 BLUEMASK = 0b000000000000000011111111
 
 # Other vars
-ALPHABET = '*zy*x*w*vu*t*s*r*qp*o**n*m*l*k*j*i*hg*f*e*d*cb*a**'  #alphabet that will be used
+ALPHABET = 'abcdefghijklmnopqrstuvwxyz************************'  #alphabet that will be used
 LIGHTSHIFT = 0  #shift the lights down the strand to the other end 
 FLICKERLOOP = 3  #number of loops to flicker
 
@@ -202,70 +202,7 @@ def runBlink(strip):
 
     time.sleep(random.randint(50,150)/1000.0)
 
-def flickerWhole(strip):
-    for i in range(20):
-      flicker(strip,random.randint(LIGHTSHIFT,len(ALPHABET)+LIGHTSHIFT))
-      time.sleep(random.randint(10,50)/1000.0)
-
-def randomOn(strip):
-    #create a list of jumbled ints
-    s = list(range(len(ALPHABET)))
-    random.shuffle(s)
-
-    colorLen = len(COLORS)
-    #Initialize all LEDs
-    for i in range(len(ALPHABET)):
-      strip.setPixelColor(s[i]+LIGHTSHIFT, COLORS[s[i]%colorLen])
-      strip.show()
-      time.sleep(random.randint(10,80)/1000.0)
-
-def colorWipe(strip, color, wait_ms=50):
-        """Wipe color across display a pixel at a time."""
-        for i in range(strip.numPixels()):
-                strip.setPixelColor(i, color)
-                strip.show()
-                time.sleep(wait_ms/1000.0)
-
-def turnOff(strip):
-   #create a list of jumbled ints
-  s = list(range(len(ALPHABET)))
-  random.shuffle(s) 
-  
-  #first, kill all lights in a semi-random fashion
-  for led in range(len(ALPHABET)):
-    strip.setPixelColor(s[led]+LIGHTSHIFT, OFF)
-    strip.show()
-    time.sleep(random.randint(10,80)/1000.0)
-
-def wheel(pos):
-    """Generate rainbow colors across 0-255 positions."""
-    if pos < 85:
-            return Color(pos * 3, 255 - pos * 3, 0)
-    elif pos < 170:
-            pos -= 85
-            return Color(255 - pos * 3, 0, pos * 3)
-    else:
-            pos -= 170
-            return Color(0, pos * 3, 255 - pos * 3)
-
-def rainbow(strip, wait_ms=20, iterations=1):
-    """Draw rainbow that fades across all pixels at once."""
-    for j in range(256*iterations):
-            for i in range(strip.numPixels()):
-                    strip.setPixelColor(i, wheel((i+j) & 255))
-            strip.show()
-            time.sleep(wait_ms/1000.0)
-
-def glowRed(strip, color, wait_ms=20, iterations=4):
-    for j in range(256*iterations):
-        for i in range(strip.numPixels()):
-            strip.setPixelColor(i, Color(j&255,0,0))
-            strip.show()
-#            time.sleep(wait_ms/1000.0)
-
-
-
-#Main program logic follows:
+# Main program logic follows:
 if __name__ == '__main__':
 	# Create NeoPixel object with appropriate configuration.
   strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
@@ -285,63 +222,29 @@ if __name__ == '__main__':
     #initialize all the lights
     initLights(strip)
     
-    #loop randomy betwen 15 seconds and 2 minutes
-    #time.sleep(3)
-    time.sleep(random.randint(15,120))
+    time.sleep(random.randint(5,15))
 
-    #pick a random response
-    switch = random.randint(1,30)
-    #switch = 15
+    #flicker each light, no delay between each
+    for i in range(20):
+      flicker(strip,random.randint(LIGHTSHIFT,len(ALPHABET)+LIGHTSHIFT))
+      time.sleep(random.randint(10,50)/1000.0)
 
-    if switch == 1:
-        word = 'its here'
-        blinkWords(strip, word)
-    elif switch == 2:
-        word = 'die die die'
-        blinkWords(strip, word)
-    elif switch == 3:
-        runBlink(strip)
-    elif switch == 4:
-        word = 'boobs'
-        blinkWords(strip, word)
-    elif switch == 5:
-        word = 'spooky'
-        blinkWords(strip, word)
-    elif switch == 6:
-        word = 'six six six'
-        blinkWords(strip, word)
-    elif switch == 7:
-        word = 'redrum'
-        blinkWords(strip, word)
-    elif switch == 8:
-        word = 'go away'
-        blinkWords(strip, word)
-    elif switch == 9:
-        word = 'fuck off'
-        blinkWords(strip, word)
-    elif switch == 10:
-        word = 'lucifer'
-        blinkWords(strip, word)
-    elif switch == 11:
-        word = 'harambe'
-        blinkWords(strip, word)
-    elif switch == 12:
-        runBlink(strip)
-    elif switch == 13:
-        turnOff(strip)
-        colorWipe(strip, RED, 150)
-        time.sleep(5)
-        turnOff(strip)
-    elif switch == 14:
-        turnOff(strip)
-        rainbow(strip, 150, 5)
-        turnOff(strip)
-    else:
-        flickerWhole(strip)
- 
-    #wait 2 seconds before resetting the lights
-    #time.sleep(2)
-    time.sleep(random.randint(2,8))
-    randomOn(strip)
+    time.sleep(2)
 
-    #lets do the time warp again
+    #flash lights to word
+    word = 'its here'
+    blinkWords(strip, word)
+    runBlink(strip)
+    time.sleep(1)
+
+    #create a list of jumbled ints
+    s = list(range(len(ALPHABET)))
+    random.shuffle(s)
+
+    #turn on each light in a semi-random fasion
+    colorLen = len(COLORS)
+    #Initialize all LEDs
+    for i in range(len(ALPHABET)):
+      strip.setPixelColor(s[i]+LIGHTSHIFT, COLORS[s[i]%colorLen])
+      strip.show()
+      time.sleep(random.randint(10,80)/1000.0)
