@@ -287,28 +287,29 @@ if __name__ == '__main__':
     
     #loop randomy betwen 15 seconds and 2 minutes
     #time.sleep(3)
-    time.sleep(random.randint(15,120))
+    time.sleep(random.randint(15,45))
 
     #pick a random response
-    switch = random.randint(1,30)
     #switch = 15
+    switch = random.randint(1,11)
 
     if switch == 1:
+        word = 'run'
+        runBlink(strip)
+    elif switch == 2:
         word = 'its here'
         blinkWords(strip, word)
-    elif switch == 2:
-        word = 'die die die'
-        blinkWords(strip, word)
     elif switch == 3:
-        runBlink(strip)
+        word = 'boo'
+        blinkWords(strip, word)
     elif switch == 4:
-        word = 'boobs'
+        word = 'happy halloween'
         blinkWords(strip, word)
     elif switch == 5:
         word = 'spooky'
         blinkWords(strip, word)
     elif switch == 6:
-        word = 'six six six'
+        word = 'boobs'
         blinkWords(strip, word)
     elif switch == 7:
         word = 'redrum'
@@ -316,32 +317,33 @@ if __name__ == '__main__':
     elif switch == 8:
         word = 'go away'
         blinkWords(strip, word)
+    #elif switch == 9:
+    #    word = 'fuck off'
+    #    blinkWords(strip, word)
+    #elif switch == 10:
+    #    word = 'lucifer'
+    #    blinkWords(strip, word)
+    #elif switch == 11:
+    #    word = 'death'
+    #    blinkWords(strip, word)
+    #elif switch == 12:
+    #    word = 'die'
+    #    blinkWords(strip, word)
     elif switch == 9:
-        word = 'fuck off'
-        blinkWords(strip, word)
-    elif switch == 10:
-        word = 'lucifer'
-        blinkWords(strip, word)
-    elif switch == 11:
-        word = 'harambe'
-        blinkWords(strip, word)
-    elif switch == 12:
-        runBlink(strip)
-    elif switch == 13:
         turnOff(strip)
         colorWipe(strip, RED, 150)
         time.sleep(5)
         turnOff(strip)
-    elif switch == 14:
+    elif switch == 10:
         turnOff(strip)
-        rainbow(strip, 150, 5)
+        rainbow(strip, 75, 3)
         turnOff(strip)
     else:
         flickerWhole(strip)
  
     #wait 2 seconds before resetting the lights
     #time.sleep(2)
-    time.sleep(random.randint(2,8))
+    time.sleep(random.randint(2,5))
     randomOn(strip)
 
     #lets do the time warp again

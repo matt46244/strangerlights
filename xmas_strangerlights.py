@@ -263,6 +263,24 @@ def glowRed(strip, color, wait_ms=20, iterations=4):
             strip.show()
 #            time.sleep(wait_ms/1000.0)
 
+def rainbowCycle(strip, wait_ms=20, iterations=5):
+        """Draw rainbow that uniformly distributes itself across all pixels."""
+        for j in range(256*iterations):
+                for i in range(strip.numPixels()):
+                        strip.setPixelColor(i, wheel((int(i * 256 / strip.numPixels()) + j) & 255))
+                strip.show()
+                time.sleep(wait_ms/1000.0)
+
+def theaterChaseRainbow(strip, wait_ms=50):
+        """Rainbow movie theater light style chaser animation."""
+        for j in range(256):
+                for q in range(3):
+                        for i in range(0, strip.numPixels(), 3):
+                                strip.setPixelColor(i+q, wheel((i+j) % 255))
+                        strip.show()
+                        time.sleep(wait_ms/1000.0)
+                        for i in range(0, strip.numPixels(), 3):
+                                strip.setPixelColor(i+q, 0)
 
 
 #Main program logic follows:
@@ -286,19 +304,19 @@ if __name__ == '__main__':
     initLights(strip)
     
     #loop randomy betwen 15 seconds and 2 minutes
-    time.sleep(3)
-    #time.sleep(random.randint(15,120))
+    #time.sleep(3)
+    time.sleep(random.randint(15,120))
 
     #pick a random response
-    switch = random.randint(1,3)
+    switch = random.randint(1,6)
     #switch = 15
 
     if switch == 1:
-        word = 'fart'
-        blinkWords(strip, word)
+        rainbow(strip)
     elif switch == 2:
-        word = 'butts'
-        blinkWords(strip, word)
+        rainbowCycle(strip)
+    elif switch == 3:
+        theaterChaseRainbow(strip)
     else:
         flickerWhole(strip)
  
